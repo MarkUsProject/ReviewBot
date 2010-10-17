@@ -9,7 +9,7 @@ def msg(msg):
         print msg
 
 
-class Member:
+class Member(object):
     def __init__(self, member_key, score):
         self.member_key = member_key
         self.score = score
@@ -18,7 +18,7 @@ class Member:
         self.score += score
 
 
-class Group:
+class Group(object):
     def __init__(self, group_name):
         self.name = group_name
         self.members = []
@@ -30,7 +30,7 @@ class Group:
         return self.members[0]
 
 
-class GroupManager:
+class GroupManager(object):
     def __init__(self, groups_file):
         self.groups_file = groups_file
         self.groups = []
@@ -62,20 +62,19 @@ class GroupManager:
         f.close()
 
 
-class ReviewRequest:
+class ReviewRequest(object):
     def __init__(self, request):
         self.id = request['id']
         self.requester = request['links']['submitter']['title']
 
     def get_score(self):
-        # Calculate the score for this review request...
         return 10
 
     def add_reviewer(self, member):
         pass
 
 
-class ReviewRequestManager:
+class ReviewRequestManager(object):
     def __init__(self, config):
         self.url = config['url']
         self.last_seen_rr = config['last_seen_rr']
@@ -107,7 +106,7 @@ class ReviewRequestManager:
 
 
 
-class ReviewBot:
+class ReviewBot(object):
     def __init__(self, config_file, groups_file):
         self.group_manager = GroupManager(groups_file)
         self.config_file = config_file
